@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Web;
 
 namespace aspnetcore_with_openid_connect.Controllers
 {
@@ -23,20 +24,38 @@ namespace aspnetcore_with_openid_connect.Controllers
         };
         IWebHostEnvironment env;
         private readonly ILogger<WeatherForecastController> _logger;
+        readonly ITokenAcquisition tokenAcquisition;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWebHostEnvironment env)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IWebHostEnvironment env  
+             , ITokenAcquisition tokenAcquisition
+            )
         {
             _logger = logger;
             this.env = env;
+            this.tokenAcquisition = tokenAcquisition;
         }
 
         [HttpGet]
-        public ContentResult Get()
+        public async Task<string> Get()
         {
-            var physicalPath = env.ContentRootPath;
-            var content = System.IO.File.ReadAllText(Path.Combine(physicalPath, "angular-app", "index.html"));
-            //Response.Redirect("/help");
-            return Content(content,"text/html");
+           
+
+            var httpClient = new HttpClient();
+           
+            
+            var token = "";
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token); 
+            return "hello world";
+        }
+
+        [HttpGet]
+        [Route("hello")]
+        public async Task<string> Hello()
+        {
+            string[] scopes = new string[] { "" };
+            string accessToken = await tokenAcquisition.GetAccessTokenForUserAsync(scopes);
+            return "hello world";
         }
     }
 }

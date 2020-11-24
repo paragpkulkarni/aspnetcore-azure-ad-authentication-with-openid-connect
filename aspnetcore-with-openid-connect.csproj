@@ -1,42 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>aspnetcore_with_openid_connect</RootNamespace>
-	  <PublishSingleFile>true</PublishSingleFile>
-	  <PublishTrimmed>true</PublishTrimmed>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="angular-app\index.html" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="angular-app\3rdpartylicenses.txt" />
-    <Content Include="angular-app\assets\css\album.css" />
-    <Content Include="angular-app\assets\css\carousel.css" />
-    <Content Include="angular-app\assets\js\popper.min.js" />
-    <Content Include="angular-app\favicon.ico" />
-    <Content Include="angular-app\main.020793f9fb993baad6cd.js" />
-    <Content Include="angular-app\polyfills.a4021de53358bb0fec14.js" />
-    <Content Include="angular-app\runtime.e227d1a0e31cbccbf8ec.js" />
-    <Content Include="angular-app\scripts.23fb9ba0a131eb80468c.js" />
-    <Content Include="angular-app\styles.69d88af22341b8bbe2f8.css" />
-    <Content Include="angular-app\UnAuthoirzed.html" />
-    <Content Include="index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="angular-app\index.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>aspnetcore_with_openid_connect</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.9" />
+		<PackageReference Include="Microsoft.Identity.Web" Version="1.2.0" />
+	</ItemGroup>
 
 </Project>
